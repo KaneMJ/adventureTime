@@ -149,7 +149,6 @@ function playerTurn(player1, bill) {
     }
 }
 
-Added a bunch of garbage to this file.attack
 
 
 
