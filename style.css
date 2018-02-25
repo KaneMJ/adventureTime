@@ -35,3 +35,42 @@ html {
 .playerCharacter, .playerHealth, .enemyCharacter, .enemyHealth {
     height: 100%;
 }
+
+.healthWrapper {
+    position: relative;
+    top: 20%;
+    border: 2px solid white;
+    border-radius: 8px;
+    height: 20%;
+}
+
+.lifeBar {
+    border: 1px solid red;
+    height: 50%;
+    position: relative;
+    z-index: -1;
+    background-color: red;
+}
+
+.manaBar {
+    border: 1px solid blue;
+    height: 50%;
+    position: relative;
+    z-index: -1;
+    background-color: blue;
+}
+
+.nameLevel {
+    position: relative;
+    top: 25%;
+}
+
+.playerHolder img, .enemyHolder img {
+    width: 40vmin;
+}
+
+.enemyHolder img {
+    float: right;
+}
+
+
