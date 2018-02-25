@@ -1,46 +1,37 @@
 ﻿body {
-    background-color: black;
     margin: 0 auto;
+    background-color: black;
 }
 
 html {
     font-size: 0;
-}
-
-.container {
-    width: 80vw;
-    height: 100vh;
-    margin: 0 auto;
-}
-
-.container * {
-    font-size: 3vmin;
-}
-.topArea, .midArea, .botArea {
-    width: 100%;
-    height: 33.333%;
-    border: 1px solid black;
     box-sizing: border-box;
-    border-radius: 8px;
-    margin: 0;
 }
 
-.topArea {
-    background-color: ThreeDDarkShadow;
+.container-fluid > * {
+    font-size: 4vmin;
 }
 
-.midArea {
-    background-color: lightskyblue;
+.container-fluid {
+    height: 100vh;
+    background-image: url("images/battle-greece.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
-.botArea {
-    background-color: white;
+.healthBar {
+    height: 20%;
 }
 
-#updateID {
-    height: 30%;
+.characterDisplay {
+    height: 60%;
 }
 
-#turnArea {
-    height: 70%;
+.userNav {
+    height: 20%;
+}
+
+.playerCharacter, .playerHealth, .enemyCharacter, .enemyHealth {
+    height: 100%;
 }
