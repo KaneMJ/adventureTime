@@ -1,3 +1,63 @@
+$(document).ready(function(){
+    var hitBtn = $('button.damage'),
+        hBar = $('#enemyBar'),
+        bar = hBar.find('.lifeBar'),
+        hit = hBar.find('.hit');
+
+    hitBtn.on("click", function(){
+        var total = hBar.data('total'),
+            value = hBar.data('value');
+
+        if (value < 0){
+            log("you dead, reset");
+            return;
+        }
+
+        var damage = Math.floor(Math.random()*total);
+        var newValue = value - damage;
+        var barWidth = (newValue / total) * 100;
+        var hitWidth = (damage / value) * 100 + "%";
+
+        hit.css('width', hitWidth);
+        hBar.data('value', newValue);
+
+        setTimeout(function(){
+            hit.css({'width': '0'});
+            bar.css('width', barWidth + "%");
+        }, 500);
+
+        log(value, damage, hitWidth);
+
+        if( value < 0){
+            log("DEAD");
+        }
+    });
+});
+function doDamage(damage){
+    var hBar = $('#enemyBar'),
+        bar = hBar.find('.lifeBar'),
+        hit = hBar.find('.hit');
+        total = hBar.data('total'),
+        value = hBar.data('value');
+
+        if (value < 0){
+            console.log("Enemy is already dead");
+            return;
+        }
+
+        var newValue = value - damage;
+        var barWidth = (newValue / total) * 100;
+        var hitWidth = (damage / value) * 100 + "%";
+
+        hit.css('width', hitWidth);
+        hBar.data('value', newValue);
+
+        setTimeout(function(){
+            hit.css({'width': '0'});
+            bar.css('width', barWidth + "%");
+        }, 500);
+}
+
 class Fighter {
     constructor(name) {
         //Fighter Stats
@@ -23,6 +83,7 @@ class Fighter {
         target.life -= dmg;
         let attackMessage = `${this.name} attacked ${target.name} for ${dmg} damage`;
         this.speak(attackMessage);
+        return dmg;
     }
 
     powerStrike(target) {
@@ -31,6 +92,7 @@ class Fighter {
         this.mana -= 10;
         let powerStrikeMessage = `${this.name} charges up their weapon and performs a power strike on ${target.name} for ${dmg} damage`;
         this.speak(powerStrikeMessage);
+        return dmg;
     }
     
     status() {
@@ -68,6 +130,7 @@ class Ninja {
         target.life -= dmg;
         let attackMessage = `${this.name} attacked ${target.name} for ${dmg} damage`;
         this.speak(attackMessage);
+        return dmg;
     }
     
     flipStrike(target) {
@@ -76,6 +139,7 @@ class Ninja {
         this.mana -= 10;
         let flipStrikeMessage = `${this.name} flips over ${target.name} and performs a quick strike for ${dmg} damage`
         this.speak(flipStrikeMessage);
+        return dmg;
     }
 
     status() {
@@ -113,6 +177,7 @@ class Mage {
         target.life -= dmg;
         let attackMessage = `${this.name} attacked ${target.name} for ${dmg} damage`;
         this.speak(attackMessage);
+        return dmg;
     }
 
     fireball(target) {
@@ -121,6 +186,7 @@ class Mage {
         this.mana -= 5;
         let fireballMessage = `${this.name} launched a fireball at ${target.name} blasting for ${dmg} damage`;
         this.speak(fireballMessage);
+        return dmg;
     }
 
     status() {
@@ -141,13 +207,21 @@ function battleSimulate(fighter1, fighter2) {
 
 function playerTurn(player1, bill) {
     for (let i = 0; i < player1.moveList.length; i++) {
-        $('#turnArea').append('<button class="' + i + '">' + player1.moveList[i] + '</button>');
-        $('.' + i).click(function () {
-            player1.moveCalls[i](bill);
-            console.log("This is happening");
-        });
+        if(player1.moveList[i] === "Status") {
+            $('#turnArea').append('<button class="' + i + '">' + player1.moveList[i] + '</button>');
+            $('.' + i).click(function () {
+                player1.moveCalls[i](bill);
+            });
+        } else {
+            $('#turnArea').append('<button class="' + i + '">' + player1.moveList[i] + '</button>');
+            $('.' + i).click(function () {
+                doDamage(player1.moveCalls[i](bill));
+            });
+        }
     }
 }
+
+
 
 
 
