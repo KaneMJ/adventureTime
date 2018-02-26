@@ -18,10 +18,6 @@ class Fighter {
         this.moveCalls = [this.attack, this.powerStrike, this.status];
     }
 
-    speak(sayThis) {
-        document.getElementById('updateID').innerText = sayThis;
-    }
-
     attack(target) {
         let dmg = Math.floor(Math.random() * this.strength);
         target.life -= dmg;
@@ -40,6 +36,10 @@ class Fighter {
     status() {
         let healthNotice = `${this.name} shouts: "I currently have ${this.life} hitpoints"`;
         this.speak(healthNotice);
+    }
+
+    speak(sayThis) {
+        document.getElementById('updateID').innerText = sayThis;
     }
 }
 

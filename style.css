@@ -41,7 +41,10 @@ html {
     top: 20%;
     border: 2px solid white;
     border-radius: 8px;
+    width: 60%;
     height: 20%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .lifeBar {
@@ -49,7 +52,6 @@ html {
     height: 50%;
     position: relative;
     z-index: -1;
-    background-color: red;
 }
 
 .manaBar {
@@ -57,12 +59,14 @@ html {
     height: 50%;
     position: relative;
     z-index: -1;
-    background-color: blue;
 }
 
 .nameLevel {
     position: relative;
     top: 25%;
+    width: 60%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .playerHolder img, .enemyHolder img {
@@ -74,8 +78,15 @@ html {
 }
 
 .skillContainer {
+    display: inline-block;
     border: 3px solid white;
     position: relative;
-    bottom: 10%;
-    height: 50%;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.textSpot {
+    text-align: center;
+    color: white;
 }
