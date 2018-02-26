@@ -49,14 +49,14 @@ html {
 }
 
 .lifeBar {
-    border: 1px solid red;
     height: 50%;
     position: relative;
     z-index: -1;
     background-color: red;
+    border-radius: 4px;
 }
 
-.hit {
+.healthHit, .manaHit {
     background: rgba(255,255,255,0.6);
     position: absolute;
     top: 0;
@@ -64,14 +64,15 @@ html {
     bottom: 0;
     width: 0%;
     transition: width .5s linear;
+    border-radius: 4px;
 }
 
 .manaBar {
-    border: 1px solid blue;
     height: 50%;
     position: relative;
     z-index: -1;
     background-color: blue;
+    border-radius: 4px;
 }
 
 .nameLevel {
