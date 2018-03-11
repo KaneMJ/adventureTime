@@ -42,7 +42,7 @@ function drainMana (mana){
         hit.css('width', hitWidth);
         mBar.data('value', newValue);
 
-        setTimeout(function(){
+        setTimeout(() =>{
             hit.css({'width': '0'});
             bar.css('width', barWidth + "%");
         }, 500);
@@ -72,29 +72,41 @@ class Fighter {
 
     attack(target) {
         let dmg = Math.floor(Math.random() * this.strength);
-        target.life -= dmg;
-        let attackMessage = `${this.name} attacked ${target.name} for ${dmg} damage`;
+        target.setHealth(dmg);
+        let attackMessage = `${this.getName()} attacked ${target.getName()} for ${dmg} damage`;
         this.speak(attackMessage);
         return dmg;
     }
 
     powerStrike(target) {
         let dmg = Math.floor(Math.random() * this.int) + 15;
-        target.life -= dmg;
+        target.setHealth(dmg);
         this.mana -= 10;
         drainMana (10);
-        let powerStrikeMessage = `${this.name} charges up their weapon and performs a power strike on ${target.name} for ${dmg} damage`;
+        let powerStrikeMessage = `${this.getName()} charges up their weapon and performs a power strike on ${target.getName()} for ${dmg} damage`;
         this.speak(powerStrikeMessage);
         return dmg;
     }
     
     status() {
-        let healthNotice = `${this.name} shouts: "I currently have ${this.life} hitpoints"`;
+        let healthNotice = `${this.getName()} shouts: "I currently have ${this.getHealth()} hitpoints"`;
         this.speak(healthNotice);
     }
 
     speak(sayThis) {
         document.getElementById('updateID').innerText = sayThis;
+    }
+
+    setHealth(amount){
+        this.life -= amount;
+    }
+
+    getHealth(){
+        return this.life;
+    }
+
+    getName(){
+        return this.name;
     }
 
     drainMana (mana){
@@ -116,7 +128,7 @@ class Fighter {
         hit.css('width', hitWidth);
         mBar.data('value', newValue);
 
-        setTimeout(function(){
+        setTimeout(() => {
             hit.css({'width': '0'});
             bar.css('width', barWidth + "%");
         }, 500);
@@ -147,29 +159,41 @@ class Ninja {
     
     attack(target) {
         let dmg = Math.floor(Math.random() * this.dex);
-        target.life -= dmg;
-        let attackMessage = `${this.name} attacked ${target.name} for ${dmg} damage`;
+        target.setHealth(dmg);
+        let attackMessage = `${this.getName()} attacked ${target.getName()} for ${dmg} damage`;
         this.speak(attackMessage);
         return dmg;
     }
     
     flipStrike(target) {
         let dmg = this.dex + this.int;
-        target.life -= dmg;
+        target.setHealth(dmg);
         this.mana -= 10;
         drainMana(10);
-        let flipStrikeMessage = `${this.name} flips over ${target.name} and performs a quick strike for ${dmg} damage`
+        let flipStrikeMessage = `${this.getName()} flips over ${target.getName()} and performs a quick strike for ${dmg} damage`
         this.speak(flipStrikeMessage);
         return dmg;
     }
 
     status() {
-        let healthNotice = `${this.name} shouts: "I currently have ${this.life} hitpoints"`;
+        let healthNotice = `${this.getName()} shouts: "I currently have ${this.getHealth()} hitpoints"`;
         this.speak(healthNotice);
     }
 
     speak(sayThis) {
         document.getElementById('updateID').innerText = sayThis;
+    }
+
+    setHealth(amount){
+        this.life -= amount;
+    }
+
+    getHealth(){
+        return this.life;
+    }
+
+    getName(){
+        return this.name;
     }
 
     drainMana (mana){
@@ -191,7 +215,7 @@ class Ninja {
         hit.css('width', hitWidth);
         mBar.data('value', newValue);
 
-        setTimeout(function(){
+        setTimeout(() => {
             hit.css({'width': '0'});
             bar.css('width', barWidth + "%");
         }, 500);
@@ -222,29 +246,41 @@ class Mage {
 
     attack(target) {
         let dmg = Math.floor(Math.random() * this.strength);
-        target.life -= dmg;
-        let attackMessage = `${this.name} attacked ${target.name} for ${dmg} damage`;
+        target.setHealth(dmg);
+        let attackMessage = `${this.getName()} attacked ${target.getName()} for ${dmg} damage`;
         this.speak(attackMessage);
         return dmg;
     }
 
     fireball(target) {
         let dmg = this.int + Math.floor(Math.random() * (this.int / 2));
-        target.life -= dmg;
+        target.setHealth(dmg);
         this.mana -= 5;
         drainMana(5);
-        let fireballMessage = `${this.name} launched a fireball at ${target.name} blasting for ${dmg} damage`;
+        let fireballMessage = `${this.getName()} launched a fireball at ${target.getName()} blasting for ${dmg} damage`;
         this.speak(fireballMessage);
         return dmg;
     }
 
     status() {
-        let healthNotice = `${this.name} shouts: "I currently have ${this.life} hitpoints"`;
+        let healthNotice = `${this.getName()} shouts: "I currently have ${this.getHealth()} hitpoints"`;
         this.speak(healthNotice);
     }
 
     speak(sayThis) {
         document.getElementById('updateID').innerText = sayThis;
+    }
+
+    setHealth(amount){
+        this.life -= amount;
+    }
+
+    getHealth(){
+        return this.life;
+    }
+
+    getName(){
+        return this.name;
     }
 
     drainMana (mana){
@@ -266,7 +302,7 @@ class Mage {
         hit.css('width', hitWidth);
         mBar.data('value', newValue);
 
-        setTimeout(function(){
+        setTimeout(()=> {
             hit.css({'width': '0'});
             bar.css('width', barWidth + "%");
         }, 500);
@@ -283,17 +319,18 @@ function playerTurn(player1, bill) {
     for (let i = 0; i < player1.moveList.length; i++) {
         if(player1.moveList[i] === "Status") {
             $('#turnArea').append('<button class="' + i + '">' + player1.moveList[i] + '</button>');
-            $('.' + i).click(function () {
+            $('.' + i).click(() => {
                 player1.moveCalls[i](bill);
             });
         } else {
             $('#turnArea').append('<button class="' + i + '">' + player1.moveList[i] + '</button>');
-            $('.' + i).click(function () {
+            $('.' + i).click(() => {
                 doDamage(player1.moveCalls[i](bill));
             });
         }
     }
 }
+
 
 var Wizard = new Mage('Wizard');
 var Barbarian = new Fighter('Barbarian');
